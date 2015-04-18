@@ -72,7 +72,7 @@
                 <li><a href="home.jsp">Home</a></li>
                     <%
                         if (Usersession.getAttribute("Privilege").toString().contains("adminUser")) {
-                            out.println("<li id='active'><a href = 'AdminConsoleHome.jsp'>Administration Console</a></li>");
+                            out.println("<li id='active'><a href = 'AdminConsoleHome.jsp'>Admin Console</a></li>");
                         }
                     %>
                 <li><a href="main.jsp">Available Exam</a></li>
