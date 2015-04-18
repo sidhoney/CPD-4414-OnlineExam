@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<html>
+    <head>
+
+        <title>User Login</title>
+        <style>
+            #box {
+                height: 352px;
+                width: 333px;
+                font: 12px Arial, Helvetica, sans-serif;
+                padding: 158px 76px 0px 76px;
+
+            }
+
+            #box img {
+                border: 1px solid black;
+            }
+
+            h1 {
+                margin-left: 330px;
+                font-size: 45px;
+                margin-bottom: -30px;
+            }
+
+            #box h2 {
+                padding: 15px;
+                margin: 0px;
+                color: #ff99bc;
+                font: bold 45px "Calibri", Arial;
+            }
+
+            #box-name {
+                float: left;
+                display: inline;
+                width: 70px;
+                text-align: left;
+                padding: 14px 15px 1px 0;
+                margin:0 0 7px 0;
+            }
+
+            #box-field {
+                float: left;
+                display: inline;
+                width: 230px;
+                margin: 0;
+                margin: 0 0 7px 0;
+            }
+
+            .form-login  {
+                width: 205px;
+                padding: 10px 4px 6px 3px;
+                -color: #1e4f8a;
+                font-size: 16px;
+
+            }
+
+            .box-options  {
+                clear: both;
+                padding-left: 87px;
+                font-size: 11px;
+            }
+
+            .box-options a {
+                font-size: 11px;
+                color: #CCCC00;
+            }
+
+            footer { 
+                margin-left: 360px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>MGIT UNIVERSITY</h1>
+        <form name="LoginForm" id="LoginForm" method="post" action="AuthenticateLogin">
+            <div style="padding: 5px 0 0 300px;">
+                <div id="box">
+                    <h2>Welcome</h2>
+                    <p>Please login to MGIT University platform to write exams and take some time to familiarize yourself with the easy-to-use learning tools</p>
+                    <br /> 
+                    <div id="box-name" style="margin-top:5px;">USERNAME</div>
+                    <div id="login-box-field" style="margin-top:5px;">
+                        <input name="Username" class="form-login" title="Username" onkeydown="if (event.keyCode == 13)
+                                    document.getElementById('LoginForm').submit()" value="" size="30" maxlength="2048" />
+                    </div>
+                    <div id="box-name">PASSWORD</div>
+                    <div id="box-field">
+                        <input name="Password" type="password" class="form-login" onkeydown="if (event.keyCode == 13)
+                                    document.getElementById('LoginForm').submit()" title="Password" value="" size="30" maxlength="2048" />
+                    </div>
+                    <br />
+                    Passwords are case sensitive<br>
+                    <span class="box-options">
+                        <a href="register.jsp" style="margin-left:0px;">Register Here</a>
+                    </span>
+
+                    <br />
+                    <br />
+
+                    <a href="javascript:void(0)" onClick="javascript:document.getElementById('LoginForm').submit()">
+                    <img src="images/login-btn.png" width="103" height="42" style="margin-left:90px;" /> </a>
+
+                </div>
+            </div>
+            <footer>
+            Copyright &copy; 2015 MGIT University. All Rights Reserved.
+            </footer>
+        </form>
+    </body>
+</html>
+
