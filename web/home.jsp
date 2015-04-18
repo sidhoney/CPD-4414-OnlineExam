@@ -28,7 +28,7 @@
                 margin: 0px;
             } 
             #navigation ul li a {
-                height:33px;
+                height: 33px;
                 display: block;
                 float: left;
                 padding: 17px 15px 0 15px;
@@ -62,7 +62,7 @@
     <body>
         <%
             HttpSession Usersession = request.getSession(false);
-            if (Usersession.getAttribute("Username") == null || Usersession.getAttribute("Privilage") == null) {
+            if (Usersession.getAttribute("Username") == null || Usersession.getAttribute("privilege") == null) {
                 response.sendRedirect("index.html");
 
             } else {
@@ -75,7 +75,7 @@
             <ul>
                 <li id="active"><a href="home.jsp">Home</a></li>
                     <%
-                        if (Usersession.getAttribute("Privilage").toString().contains("adminUser")) {
+                        if (Usersession.getAttribute("privilege").toString().contains("adminUser")) {
                             out.println("<li><a href = 'AdminConsoleHome.jsp'>Administration Console</a></li>");
                         }
                     %>

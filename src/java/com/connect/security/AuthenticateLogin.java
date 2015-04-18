@@ -140,9 +140,9 @@ public class AuthenticateLogin extends HttpServlet {
                 newUserSession.setAttribute("Username", Username);
                 newUserSession.setAttribute("UserId", DBUserId);
                 if (userTypeFlag == ADMIN_USER) {
-                    newUserSession.setAttribute("Privilage", "adminUser");
+                    newUserSession.setAttribute("privilege", "adminUser");
                 } else if (userTypeFlag == NORMAL_USER) {
-                    newUserSession.setAttribute("Privilage", "normalUser");
+                    newUserSession.setAttribute("privilege", "normalUser");
                 }
                 response.sendRedirect("home.jsp");
             } else if (authenticatorFlag == LOGIN_WRONGPASSWORD) {
