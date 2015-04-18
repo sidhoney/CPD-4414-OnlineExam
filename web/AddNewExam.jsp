@@ -109,7 +109,7 @@
                      </tr>
                      <tr>
                         <td style="color: #4778e3;">
-                           <b> Exam Description</b>
+                           <b> Exam Desc</b>
                         </td>
                         <td>
                            <textarea rows="10" cols="50" name="examdescription" id="txtexamdescription" style="width: 400px"></textarea>
