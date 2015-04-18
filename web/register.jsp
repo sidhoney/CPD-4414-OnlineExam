@@ -61,7 +61,7 @@
                 padding: 10px 4px 6px 3px;
                 border: 1px solid #0d2c52;
                 font-size: 16px;
-                color: #ebebeb;
+                color: #000000;
             }
 
 
