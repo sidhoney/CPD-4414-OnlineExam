@@ -20,20 +20,12 @@ import javax.servlet.http.HttpSession;
  *
  * @author C0648301
  */
-public class ChangeUserPrivilege extends HttpServlet {
+public class RemoveExam extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    String dbUrl = "jdbc:mysql://localhost/onlineexam";
+    String dbUrl = "jdbc:mysql://localhost/onlineexamproject";
     String dbClass = "com.mysql.jdbc.Driver";
     String query = "";
+    String query1 = "";
 
     /**
      *
@@ -45,40 +37,33 @@ public class ChangeUserPrivilege extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
         PrintWriter out = response.getWriter();
-        String UserIdToChange = "";
-        String ChangeType = "";
-        String AddAdminQuery = "";
-        String RemoveAdminQuery = "";
-
-        int output;
+        String examIdToRemove = null;
         HttpSession UserSession = request.getSession(false);
-
+        UserSession.setAttribute("RemoveExamException", null);
         try {
-            UserIdToChange = request.getParameter("UserToChange");
-            ChangeType = request.getParameter("ChangeType");
+            examIdToRemove = request.getParameter("ExamIdToRemoveRadio");
 
-            Connection con = DriverManager.getConnection(dbUrl, "root", "");
-            PreparedStatement userPrivilegeChanger;
-
-            if ("ToAdminUser".equals(ChangeType)) {
-
-                AddAdminQuery = "insert into administrator_list (UserId) values(?)";
-
-                userPrivilegeChanger = con.prepareStatement(AddAdminQuery);
-                userPrivilegeChanger.setString(1, UserIdToChange);
-                output = userPrivilegeChanger.executeUpdate();
-            } else if ("ToNormalUser".equals(ChangeType)) {
-                RemoveAdminQuery = "delete from administrator_list where UserId = ?";
-
-                userPrivilegeChanger = con.prepareStatement(RemoveAdminQuery);
-                userPrivilegeChanger.setString(1, UserIdToChange);
-                output = userPrivilegeChanger.executeUpdate();
+            if ("".equals(examIdToRemove) || examIdToRemove == null) {
+                UserSession.setAttribute("RemoveExamException", "Please select an Exam to DELETE");
+                response.sendRedirect("AdminRemoveExam.jsp");
             }
 
-            response.sendRedirect("AdminChangeUserPrivileges.jsp");
+            Class.forName(dbClass);
+            Connection con = DriverManager.getConnection(dbUrl, "root", "");
+            PreparedStatement insertNewQuestion;
+            PreparedStatement insertNewQuestion1;
+            query = "delete from exam_list where ExamId = ?";
+            query1 = "delete from exam_question_bank where ExamId = ?";
 
+            insertNewQuestion = con.prepareStatement(query);
+            insertNewQuestion1 = con.prepareStatement(query1);
+            insertNewQuestion.setString(1, examIdToRemove);
+            insertNewQuestion1.setString(1, examIdToRemove);
+
+            int output = insertNewQuestion.executeUpdate();
+
+            response.sendRedirect("AdminRemoveExam.jsp");
         } catch (Exception e) {
             e.printStackTrace(out);
         } finally {
@@ -86,6 +71,7 @@ public class ChangeUserPrivilege extends HttpServlet {
         }
     }
 
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -122,5 +108,5 @@ public class ChangeUserPrivilege extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }
+    }// </editor-fold>
 }

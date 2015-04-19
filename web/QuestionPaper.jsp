@@ -1,8 +1,9 @@
 <%-- 
-   Document   : Question Paper
-   Created on : 18-Apr-2015, 1:57:54 PM
-   Author     : C0648301
+    Document   : QuestionPaper
+    Created on : 18-Apr-2015, 8:14:29 PM
+    Author     : C0648301
 --%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -53,11 +54,10 @@
     </head>
     <body>
         <form name="QuestionPaperForm" id="QuestionPaperForm" action="RunExam" method="POST">
-            <b id="QuestionNoSpace">
-                <script> getCookie("QuestionNo");</script>. 
-            </b>
+            <b id="QuestionNoSpace"><script> getCookie("QuestionNo");</script>. </b>
             <span id="QuestionSpace" style="width: 100%"><% out.print(UserSession.getAttribute("CurrentQuestion")); %></span>
             <br/><br/>
+
             <input type="radio" name="OptionsRadio" id="OptionsRadio" value="OptionA"
                    <%
                        if (SelectedOption.contains("OptionA")) {
@@ -67,6 +67,7 @@
                    %>
                    />
             <span id="OptionA-Space"><% out.print(UserSession.getAttribute("OptionA")); %></span><br/><br/>
+
             <input type="radio" name="OptionsRadio" id="OptionsRadio" value="OptionB"
                    <%
                        if (SelectedOption.contains("OptionB")) {
@@ -75,6 +76,7 @@
                    %>
                    />
             <span id="OptionB-Space"><% out.print(UserSession.getAttribute("OptionB")); %></span><br/><br/>
+
             <input type="radio" name="OptionsRadio" id="OptionsRadio" value="OptionC"
                    <%
                        if (SelectedOption.contains("OptionC")) {
@@ -83,6 +85,7 @@
                    %>
                    />
             <span id="OptionC-Space"><% out.print(UserSession.getAttribute("OptionC")); %></span><br/><br/>
+
             <input type="radio" name="OptionsRadio" id="OptionsRadio" value="OptionD"
                    <%
                        if (SelectedOption.contains("OptionD")) {
@@ -93,14 +96,17 @@
                    />
             <span id="OptionD-Space"><% out.print(UserSession.getAttribute("OptionD")); %></span><br/><br/>
         </form>
-
+        <!--     <br/><br/><span id="Debug-Space">
         <%
-
+       
         %>
-
-        <%          } catch (Exception err) {
+   
+        -->
+        <%
+            } catch (Exception err) {
                 err.printStackTrace();
             }
         %>
     </body>
 </html>
+

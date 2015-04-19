@@ -4,110 +4,123 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-
-        <title>User Login</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+        <title>User Login- MGIT</title>
         <style>
-            #box {
-                height: 352px;
-                width: 333px;
-                font: 12px Arial, Helvetica, sans-serif;
-                padding: 158px 76px 0px 76px;
-
+            #login-box {
+                width:333px;
+                height: 452px;
+                padding: 50px 76px 0 76px;
+                color: black;
+                font: 10px;
+                background: url(images/3.png) no-repeat left top;
             }
 
             h1 {
-                margin-left: 330px;
-                font-size: 45px;
-                margin-bottom: -30px;
+                padding-left: 400px;
+                padding-top: 100px;
+
             }
 
-            #box h2 {
-                padding: 15px;
-                margin: 0px;
-                color: #ff99bc;
-                font: bold 45px "Calibri", Arial;
+            #login-box img {
+                border:none;
             }
 
-            #box-name {
+            #login-box h2 {
+
+                margin:0;
+                color: #ebebeb;
+            }
+
+
+            #login-box-name {
                 float: left;
-                display: inline;
-                width: 70px;
+                display:inline;
                 text-align: left;
-                padding: 14px 15px 1px 0;
+                padding: 16px 10px 0 0;
                 margin:0 0 7px 0;
             }
 
-            #box-field {
+            #login-box-field {
                 float: left;
-                display: inline;
-                width: 230px;
-                margin: 0;
-                margin: 0 0 7px 0;
+                display:inline;
+                width:230px;
+                margin:0;
+                margin:0 0 7px 0;
             }
+
 
             .form-login  {
                 width: 205px;
                 padding: 10px 4px 6px 3px;
-                -color: #1e4f8a;
                 font-size: 16px;
 
             }
 
-            .box-options  {
-                clear: both;
-                padding-left: 87px;
+
+            .login-box-options  {
+                clear:both;
+                padding-left:87px;
                 font-size: 11px;
             }
 
-            .box-options a {
+            .login-box-options a {
+                color: #ebebeb;
                 font-size: 11px;
-                color: #CCCC00;
             }
 
+            #register-box {
+                width:833px;
+                height: 652px;
+                padding: 0px 186px 20px 106px;
+                color: #ebebeb;
+                font: 12px;
+                background: url(images/register-box-backg.png) no-repeat left top;
+            }
             footer { 
                 margin-left: 360px;
             }
         </style>
+
     </head>
+
     <body>
-        <h1>MGIT UNIVERSITY</h1>
+        <h1>MGIT University</h1>
         <form name="LoginForm" id="LoginForm" method="post" action="AuthenticateLogin">
+
             <div style="padding: 5px 0 0 300px;">
-                <div id="box">
-                    <h2>Welcome</h2>
-                    <p>Please login to MGIT University platform to write exams and take some time to familiarize yourself with the easy-to-use learning tools</p>
-                    <br /> 
-                    <div id="box-name" style="margin-top:5px;">USERNAME</div>
-                    <div id="login-box-field" style="margin-top:5px;">
+
+
+                <div id="login-box">
+
+                    <h2>Login</h2>
+                    <p>Please enter the username and password</p>
+                    <br />
+                    <br />
+                    <div id="login-box-name" style="margin-top:20px;">USERNAME</div><div id="login-box-field" style="margin-top:20px;">
                         <input name="Username" class="form-login" title="Username" onkeydown="if (event.keyCode == 13)
-                                    document.getElementById('LoginForm').submit()" value="" size="30" maxlength="2048" />
-                    </div>
-                    <div id="box-name">PASSWORD</div>
-                    <div id="box-field">
+                                    document.getElementById('LoginForm').submit()" value="" size="30" maxlength="2048" /></div>
+                    <div id="login-box-name">PASSWORD</div><div id="login-box-field">
                         <input name="Password" type="password" class="form-login" onkeydown="if (event.keyCode == 13)
-                                    document.getElementById('LoginForm').submit()" title="Password" value="" size="30" maxlength="2048" />
-                    </div>
+                                    document.getElementById('LoginForm').submit()" title="Password" value="" size="30" maxlength="2048" /></div>
                     <br />
-                    Passwords are case sensitive<br>
-                    <span class="box-options">
-                        <a href="register.jsp" style="margin-left:0px;">Register Here</a>
-                    </span>
-
+                    <span class="login-box-options">
+                        <a href="register.jsp" style="margin-left:0px;">Need to REGISTER?</a></span>
                     <br />
                     <br />
-
                     <a href="javascript:void(0)" onClick="javascript:document.getElementById('LoginForm').submit()">
-                    <img src="images/login-btn.png" width="103" height="42" style="margin-left:90px;" /> </a>
+                        <img src="images/1.png" width="103" height="42" style="margin-left:90px;" /></a>
 
                 </div>
+
             </div>
             <footer>
-            Copyright &copy; 2015 MGIT University. All Rights Reserved.
+                Copyright &copy; 2015 MGIT University. All Rights Reserved.
             </footer>
         </form>
+
     </body>
 </html>
 

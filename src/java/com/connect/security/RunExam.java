@@ -9,8 +9,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +22,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author C0648301
  */
-public class RemoveUser extends HttpServlet {
+public class RunExam extends HttpServlet {
 
     String dbUrl = "jdbc:mysql://localhost/onlineexamproject";
     String dbClass = "com.mysql.jdbc.Driver";
@@ -37,37 +39,54 @@ public class RemoveUser extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        String userIdToRemove = null;
-        HttpSession UserSession = request.getSession(false);
-        UserSession.setAttribute("RemoveUserException", null);
         try {
-            userIdToRemove = request.getParameter("UserIdToRemoveRadio");
+            int iQuestionNo = 0;
+            String Direction = "";
+            String SelectedOption = "";
+            HttpSession UserSession = request.getSession(false);
 
-            if ("".equals(userIdToRemove) || userIdToRemove == null) {
-                UserSession.setAttribute("RemoveUserException", "Please select a user account to delete");
-                response.sendRedirect("AdminRemoveUser.jsp");
+            Cookie[] ExamCookies = request.getCookies();
+            for (int cookieCount = 0; cookieCount < ExamCookies.length; cookieCount++) {
+                if (ExamCookies[cookieCount].getName().equals("QuestionNo")) {
+                    iQuestionNo = Integer.parseInt(ExamCookies[cookieCount].getValue());
+                }
+                if (ExamCookies[cookieCount].getName().equals("MoveDirection")) {
+                    Direction = ExamCookies[cookieCount].getValue();
+                }
             }
 
-            Class.forName(dbClass);
+            if (Direction.equals("Next")) {
+                iQuestionNo = iQuestionNo - 1;
+                SelectedOption = request.getParameter("OptionsRadio");
+                String OptionName = "Question" + iQuestionNo + "SelectedOption";
+                UserSession.setAttribute(OptionName, SelectedOption);
+                iQuestionNo++;
+            } else if (Direction.equals("Back")) {
+                iQuestionNo = iQuestionNo + 1;
+                SelectedOption = request.getParameter("OptionsRadio");
+                String OptionName = "Question" + iQuestionNo + "SelectedOption";
+                UserSession.setAttribute(OptionName, SelectedOption);
+                iQuestionNo--;
+            }
+
+            Class.forName("com.mysql.jdbc.Driver");
+
             Connection con = DriverManager.getConnection(dbUrl, "root", "");
-            PreparedStatement insertNewQuestion;
+            Statement stmt = con.createStatement();
 
-            query = ""
-                    + "delete from user_information where UserId = ?;"
-                    + "delete from login_credentials where UserId = ?;"
-                    + "delete from administrator_list where UserId = ?;"
-                    + "delete from exam_results where UserId = ?;";
+            query = "select Question, OptionA, OptionB, OptionC, OptionD from Exam_Question_Bank where ExamId="
+                    + UserSession.getAttribute("ExamID") + " and QuestionNo = " + iQuestionNo;
+            ResultSet rs = stmt.executeQuery(query);
 
-            insertNewQuestion = con.prepareStatement(query);
+            if (rs.next()) {
+                UserSession.setAttribute("CurrentQuestion", rs.getString("Question"));
+                UserSession.setAttribute("OptionA", rs.getString("OptionA"));
+                UserSession.setAttribute("OptionB", rs.getString("OptionB"));
+                UserSession.setAttribute("OptionC", rs.getString("OptionC"));
+                UserSession.setAttribute("OptionD", rs.getString("OptionD"));
+            }
 
-            insertNewQuestion.setString(1, userIdToRemove);
-            insertNewQuestion.setString(2, userIdToRemove);
-            insertNewQuestion.setString(3, userIdToRemove);
-            insertNewQuestion.setString(4, userIdToRemove);
-
-            int output = insertNewQuestion.executeUpdate();
-
-            response.sendRedirect("AdminRemoveUser.jsp");
+            response.sendRedirect("QuestionPaper.jsp");
         } catch (Exception e) {
             e.printStackTrace(out);
         } finally {

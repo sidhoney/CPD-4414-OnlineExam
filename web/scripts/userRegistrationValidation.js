@@ -10,6 +10,7 @@ var AgeFlag = 0;
 var NameFlag = 0;
 var EmailFlag = 0;
 var PhoneFlag = 0;
+
 var isValidAge = /^(([1]{1}[3-9]{1})|([23456789]{1}[0-9]{1}))$/;
 var isValidName = /^[a-zA-Z]+(\s[a-zA-Z]+)*$/;
 var isValidEmail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
@@ -21,12 +22,12 @@ function validateName()
 
     if (name == "")
     {
-        document.getElementById("nameError").innerHTML = "You have to enter your Full Name";
+        document.getElementById("nameError").innerHTML = "Please enter full name";
         NameFlag = 1;
     }
     else if (document.getElementById("txtName").value.search(isValidName))
     {
-        document.getElementById("nameError").innerHTML = "Name must only contain Alphabets";
+        document.getElementById("nameError").innerHTML = "Name must only contain alphabets";
         NameFlag = 1;
     }
     else
@@ -41,12 +42,12 @@ function validateAge()
     var age = document.getElementById("txtAge").value;
     if (age == "")
     {
-        document.getElementById("ageError").innerHTML = "You have to enter your Age";
+        document.getElementById("ageError").innerHTML = "Please enter your Age";
         AgeFlag = 1;
     }
     else if (document.getElementById("txtAge").value.search(isValidAge))
     {
-        document.getElementById("ageError").innerHTML = "Age must be 13 to 99";
+        document.getElementById("ageError").innerHTML = "Age must be between 13-99";
         AgeFlag = 1;
     }
     else
@@ -64,7 +65,7 @@ function validateAge()
     }
     else
     {
-        document.getElementById("ageError").innerHTML = "Enter valid Age";
+        document.getElementById("ageError").innerHTML = "Please enter a valid Age";
         AgeFlag = 1;
     }
 }
@@ -75,7 +76,7 @@ function validateAddress()
 
     if (address == "")
     {
-        document.getElementById("addressError").innerHTML = "You have to enter your Address";
+        document.getElementById("addressError").innerHTML = "Please enter your Address";
     }
     else
     {
@@ -89,12 +90,12 @@ function validatePhone()
 
     if (phone == "")
     {
-        document.getElementById("phoneError").innerHTML = "Please enter a valid Mobile No";
+        document.getElementById("phoneError").innerHTML = "Please enter valid Mobile Number";
         PhoneFlag = 1;
     }
     else if (document.getElementById("txtPhone").value.search(isValidPhone))
     {
-        document.getElementById("phoneError").innerHTML = "Mobile No must be 7 to 12";
+        document.getElementById("phoneError").innerHTML = "Mobile Number must be 10 digits";
         PhoneFlag = 1;
     }
     else
@@ -110,12 +111,12 @@ function validateEmail()
 
     if (email == "")
     {
-        document.getElementById("emailError").innerHTML = "You must enter a valid Email-ID";
+        document.getElementById("emailError").innerHTML = "Please enter valid Email-ID";
         EmailFlag = 1;
     }
     else if (document.getElementById("txtEmail").value.search(isValidEmail))
     {
-        document.getElementById("emailError").innerHTML = "Please enter a valid Email-ID";
+        document.getElementById("emailError").innerHTML = "Please enter valid Email-ID";
         EmailFlag = 1;
     }
     else
@@ -127,13 +128,14 @@ function validateEmail()
 
 function validatePassword()
 {
+    
 
     var password = document.getElementById("txtPassword").value;
     var confirmPassword = document.getElementById("txtConfirmPassword").value;
 
     if (password != confirmPassword)
     {
-        document.getElementById("passwordError").innerHTML = "The password details does not match";
+        document.getElementById("passwordError").innerHTML = "The passwords do not match!!";
         document.getElementById("txtPassword").value = "";
         document.getElementById("txtConfirmPassword").value = "";
         PasswordFlag = 1;
@@ -158,55 +160,55 @@ function registerUser()
 
     if (name == "")
     {
-        document.getElementById("errMain").innerHTML = "Name field should not be blank";
+        document.getElementById("errMain").innerHTML = "Name field cannot be blank";
     }
     else if (age == "")
     {
-        document.getElementById("errMain").innerHTML = "Age field should not be blank";
+        document.getElementById("errMain").innerHTML = "Age field cannot be blank";
     }
     else if (address == "")
     {
-        document.getElementById("errMain").innerHTML = "Address field should not be blank";
+        document.getElementById("errMain").innerHTML = "Address field cannot be blank";
     }
     else if (phone == "")
     {
-        document.getElementById("errMain").innerHTML = "Mobile Number field should not be blank";
+        document.getElementById("errMain").innerHTML = "Mobile Number cannot be blank";
     }
     else if (email == "")
     {
-        document.getElementById("errMain").innerHTML = "Email-ID field should not be blank";
+        document.getElementById("errMain").innerHTML = "Email-ID cannot be blank";
     }
     else if (username == "")
     {
-        document.getElementById("errMain").innerHTML = "Username field should not be blank";
+        document.getElementById("errMain").innerHTML = "Username field cannot be blank";
     }
     else if (UsernameFlag == 1)
     {
-        document.getElementById("errMain").innerHTML = "The username you entered has already been taken";
+        document.getElementById("errMain").innerHTML = "The username you entered is already taken";
     }
     else if (PasswordFlag == 1)
     {
-        document.getElementById("errMain").innerHTML = "Please check the password you have entered";
+        document.getElementById("errMain").innerHTML = "Please check the entered password";
     }
     else if (password == "")
     {
-        document.getElementById("errMain").innerHTML = "Password field should not be left blank";
+        document.getElementById("errMain").innerHTML = "Password cannot be left blank";
     }
     else if (confirmPassword == "")
     {
-        document.getElementById("errMain").innerHTML = "Please confirm the password";
+        document.getElementById("errMain").innerHTML = "Please confirm Password you have entered";
     }
     else if (AgeFlag == 1)
     {
-        document.getElementById("errMain").innerHTML = "Please check the age";
+        document.getElementById("errMain").innerHTML = "Please check Age you have entered";
     }
     else if (PhoneFlag == 1)
     {
-        document.getElementById("errMain").innerHTML = "Please check the Mobile No";
+        document.getElementById("errMain").innerHTML = "Please check the entered Mobile Number";
     }
     else if (EmailFlag == 1)
     {
-        document.getElementById("errMain").innerHTML = "Please check the Email-ID";
+        document.getElementById("errMain").innerHTML = "Please check the entered Email-ID";
     }
 
     else
@@ -238,7 +240,18 @@ function stateChanged() {
         UsernameFlag = 0;
     }
 }
-
-
-
-
+function GetXmlHttpObject(){
+var xmlHttp=null;
+try{
+  xmlHttp=new XMLHttpRequest();
+ }
+catch (e) {
+ try {
+  xmlHttp=new ActiveXObject("Msxml2.XMLHTTP");
+  }
+ catch (e){
+  xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+ }
+return xmlHttp;
+}

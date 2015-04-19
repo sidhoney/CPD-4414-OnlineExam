@@ -20,10 +20,11 @@ import javax.servlet.http.HttpSession;
  *
  * @author C0648301
  */
-public class RemoveUser extends HttpServlet {
+public class ChangeUserPrivilage extends HttpServlet {
 
     String dbUrl = "jdbc:mysql://localhost/onlineexamproject";
     String dbClass = "com.mysql.jdbc.Driver";
+
     String query = "";
 
     /**
@@ -37,37 +38,36 @@ public class RemoveUser extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        String userIdToRemove = null;
+        String UserIdToChange = "";
+        String ChangeType = "";
+        String AddAdminQuery = "";
+        String RemoveAdminQuery = "";
+        int output;
         HttpSession UserSession = request.getSession(false);
-        UserSession.setAttribute("RemoveUserException", null);
         try {
-            userIdToRemove = request.getParameter("UserIdToRemoveRadio");
+            UserIdToChange = request.getParameter("UserToChange");
+            ChangeType = request.getParameter("ChangeType");
 
-            if ("".equals(userIdToRemove) || userIdToRemove == null) {
-                UserSession.setAttribute("RemoveUserException", "Please select a user account to delete");
-                response.sendRedirect("AdminRemoveUser.jsp");
+            Connection con = DriverManager.getConnection(dbUrl, "root", "");
+            PreparedStatement userPrivilageChanger;
+
+            if ("ToAdminUser".equals(ChangeType)) {
+
+                AddAdminQuery = "insert into administrator_list (UserId) values(?)";
+
+                userPrivilageChanger = con.prepareStatement(AddAdminQuery);
+                userPrivilageChanger.setString(1, UserIdToChange);
+                output = userPrivilageChanger.executeUpdate();
+            } else if ("ToNormalUser".equals(ChangeType)) {
+                RemoveAdminQuery = "delete from administrator_list where UserId = ?";
+
+                userPrivilageChanger = con.prepareStatement(RemoveAdminQuery);
+                userPrivilageChanger.setString(1, UserIdToChange);
+                output = userPrivilageChanger.executeUpdate();
             }
 
-            Class.forName(dbClass);
-            Connection con = DriverManager.getConnection(dbUrl, "root", "");
-            PreparedStatement insertNewQuestion;
+            response.sendRedirect("AdminChangeUserPrivileges.jsp");
 
-            query = ""
-                    + "delete from user_information where UserId = ?;"
-                    + "delete from login_credentials where UserId = ?;"
-                    + "delete from administrator_list where UserId = ?;"
-                    + "delete from exam_results where UserId = ?;";
-
-            insertNewQuestion = con.prepareStatement(query);
-
-            insertNewQuestion.setString(1, userIdToRemove);
-            insertNewQuestion.setString(2, userIdToRemove);
-            insertNewQuestion.setString(3, userIdToRemove);
-            insertNewQuestion.setString(4, userIdToRemove);
-
-            int output = insertNewQuestion.executeUpdate();
-
-            response.sendRedirect("AdminRemoveUser.jsp");
         } catch (Exception e) {
             e.printStackTrace(out);
         } finally {
@@ -75,7 +75,6 @@ public class RemoveUser extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

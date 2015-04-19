@@ -1,8 +1,9 @@
 <%-- 
     Document   : checkExamId
-    Created on : 18-Apr-2015, 2:00:16 PM
+    Created on : 18-Apr-2015, 8:09:37 PM
     Author     : C0648301
 --%>
+
 
 <%@ page import="java.sql.*" %> 
 <%
@@ -10,7 +11,7 @@
     System.out.println(name);
     String data = "";
     boolean isInputNumOnly = false;
-    String dbUrl = "jdbc:mysql://localhost/onlineexam";
+    String dbUrl = "jdbc:mysql://localhost/onlineexamproject";
     try {
         Class.forName("com.mysql.jdbc.Driver");
 
@@ -18,7 +19,7 @@
         if (isInputNumOnly) {
             Connection con = DriverManager.getConnection(dbUrl, "root", "");
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select * from exam_list where ExamId=" + name + "");
+            ResultSet rs = stmt.executeQuery("select * from Exam_List where ExamId=" + name + "");
             int count = 0;
             while (rs.next()) {
 
@@ -26,12 +27,12 @@
             }
 
             if (count > 0) {
-                data = "Exam ID already exists.";
+                data = "Exam-ID already exists.";
             } else {
                 data = "Available";
             }
         } else {
-            data = "Exam ID must be have 5 digits";
+            data = "Exam-ID must be have 5 digits";
         }
         out.println(data);
 

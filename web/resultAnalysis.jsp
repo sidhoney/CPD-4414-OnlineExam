@@ -1,6 +1,6 @@
 <%-- 
     Document   : resultAnalysis
-    Created on : 18-Apr-2015, 2:04:58 PM
+    Created on : 18-Apr-2015, 8:15:17 PM
     Author     : C0648301
 --%>
 
@@ -24,7 +24,7 @@
                 String UserSelection = "";
                 String Question = "";
 
-                String dbUrl = "jdbc:mysql://localhost/onlineexam";
+                String dbUrl = "jdbc:mysql://localhost/onlineexamproject";
                 String dbClass = "com.mysql.jdbc.Driver";
                 String query = "";
         %>
@@ -48,6 +48,7 @@
                                 + UserSession.getAttribute("ExamID") + " order by QuestionNo asc";
                         ResultSet rs = stmt.executeQuery(query);
 
+                        //-- Checking user answers and generating test score
                         while (rs.next()) {
                             String qno = rs.getString("QuestionNo");
                             Question = rs.getString("Question");

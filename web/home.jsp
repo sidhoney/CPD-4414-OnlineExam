@@ -1,17 +1,17 @@
 <%-- 
     Document   : home
-    Created on : 17-Apr-2015, 11:21:37 PM
+    Created on : 18-Apr-2015, 8:11:43 PM
     Author     : C0648301
 --%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Welcome to Home Page</title>
-        <style>
-            #navigation {
+        <title>Home - MGIT Univ</title>
+        <style>#navigation {
                 width: 950px;
                 height: 50px;
                 margin: 0;
@@ -27,13 +27,14 @@
                 display: inline;
                 margin: 0px;
             } 
+
             #navigation ul li a {
-                height: 33px;
+                height:33px;
                 display: block;
                 float: left;
                 padding: 17px 15px 0 15px;
                 font: bold 12px Arial;
-                color: #FFF;
+                color: #0099cc;
                 text-decoration: none;
                 background: url(images/navigation-separator.png) no-repeat right center;
             } 
@@ -62,25 +63,25 @@
     <body>
         <%
             HttpSession Usersession = request.getSession(false);
-            if (Usersession.getAttribute("Username") == null || Usersession.getAttribute("privilege") == null) {
+            if (Usersession.getAttribute("Username") == null || Usersession.getAttribute("Privilage") == null) {
                 response.sendRedirect("index.html");
 
             } else {
         %>
-        <h2 class="Page-Heading">Online Examination Portal</h2>  
+        <h2 class="Page-Heading">MGIT University Online</h2>  
         <%
-            out.println("<b>Welcome " + Usersession.getAttribute("Username") + "...</b>");
+            out.println("<b>Welcome " + Usersession.getAttribute("Username") + "</b>");
         %>
         <div id="navigation">
             <ul>
                 <li id="active"><a href="home.jsp">Home</a></li>
                     <%
-                        if (Usersession.getAttribute("privilege").toString().contains("adminUser")) {
+                        if (Usersession.getAttribute("Privilage").toString().contains("adminUser")) {
                             out.println("<li><a href = 'AdminConsoleHome.jsp'>Administration Console</a></li>");
                         }
                     %>
                 <li><a href="main.jsp">Available Exams</a></li>
-                <li><a href="PreviousResults.jsp">Previous Results</a></li>
+                <li><a href="PreviousResults.jsp">Previous Grades</a></li>
                 <li><a href="ContactUs.jsp">Contact Us</a></li>
                 <li><a href="Logout.jsp">Logout</a></li>
             </ul>
@@ -90,35 +91,31 @@
             <tr>
                 <td>
 
-                    <h1 class="Page-Heading" style="font-size: 34px; padding-top: 20px"> Welcome . . . .</h1>
-                    <p >Welcome to the MGIT Examination Portal.
-                        Our comprehensive program provides you with the necessary information needed 
-                        to have a smooth and successful transition to college life. Our goal is to ensure 
-                        that all first year students feel welcomed and supported during this program. 
-                        Your overall engagement in college life is an important factor in your progress towards graduation.  
-                        Campus Connection runs over two days; each day is assigned to different program areas.  
+                    <h1 class="Page-Heading" style="font-size: 34px; padding-top: 20px"> Welcome</h1>
+                    <p >MGIT University has been servicing Canadian and international students for over 100 years
+                        and has truly evolved from a public not-for-profit college to a global post-secondary education
+                        provider.
 
                     <p>
-                    <h4 style="color: #4778e3"><font size="5"><b> Assessments</b></font></h4>
+                    <h4 style="color: #4778e3"><font size="5"><b> Exams</b></font></h4>
 
-                    <p>Campus Connection will provide students and parents/supporters with important information on how 
-                        to succeed at college. You will also have the opportunity to complete math assessment 
-                        (applies to certain programs). Keep checking this website for the most up to date information 
-                        and to find out which day you should attend. Math assessments, itineraries, driving directions and 
-                        much more will be added in the near future.</p>
+                    <p>On the online examination portal we offer quality education in a challenging yet student-friendly 
+                        environment. Following the MGIT University curriculum, each semester is designed to meet the challenges
+                        unique to international students and create a quality academic experience. We offer small class sizes 
+                        leading to efficient teacher-student interaction, flexible instruction hours.</p>
 
-                    <h4 style="color: #4778e3"><font size="5"><b>Standards</b></font></h4>
+                    <h4 style="color: #4778e3"><font size="5"><b>About</b></font></h4>
 
                     <ul>
-                        <li style="padding: 5px">Exam score is purely based on the performance of the student </li>
+                        <li style="padding: 5px">Exam is closed book </li>
 
-                        <li style="padding: 5px">All exams currently registered at the web-site is available only during Lecture's advised Schedule</li>
+                        <li style="padding: 5px">All tests currently registered at the website is available to the user during the Instructors Scheduled time</li>
 
-                        <li style="padding: 5px">The marks wont be changed, all results are generated purely on the basis of merit.</li>
+                        <li style="padding: 5px">Marks generated are purely on the basis of answers</li>
 
-                        <li style="padding: 5px">The test consist of Twenty-five multiple choice questions that relate to course schedule</li>
+                        <li style="padding: 5px">The test consist of 5 multiple choice questions that relate to subject knowledge</li>
 
-                        <li style="padding: 5px">The exam does not have negative marking</li>
+
                     </ul>
                     </p>
 

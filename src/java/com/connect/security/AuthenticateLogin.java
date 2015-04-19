@@ -5,19 +5,14 @@
  */
 package com.connect.security;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.sql.*;
 import javax.servlet.http.HttpSession;
-import org.jboss.weld.context.http.Http;
 
 /**
  *
@@ -35,6 +30,7 @@ public class AuthenticateLogin extends HttpServlet {
     int DBUserId;
     String DBPass = "";
     String DBUser = "";
+
     static final int LOGIN_SUCCESS = 1;
     static final int LOGIN_WRONGPASSWORD = 2;
     static final int LOGIN_UNKNOWNUSERNAME = 3;
@@ -42,6 +38,11 @@ public class AuthenticateLogin extends HttpServlet {
     static final int NORMAL_USER = 5;
 
     /**
+     * authenticatorFlag - used to record various possible states for login
+     * authentication process The value set in the authenticatorFlag may depict
+     * one of the many possible states for the validation process
+     *
+     *
      *
      * @param config
      * @throws ServletException
@@ -66,10 +67,10 @@ public class AuthenticateLogin extends HttpServlet {
 
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Please hold while we review your details</title>");
+            out.println("<title>Patience while we check your records</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h3>Please wait </h3>");
+            out.println("<h3>Please wait</h3>");
             out.println("</body>");
             out.println("</html>");
 
@@ -93,12 +94,13 @@ public class AuthenticateLogin extends HttpServlet {
                 DBUser = rs.getString("Username");
                 DBPass = rs.getString("Password");
 
-                UserAuth = DBUser.contains(Username);
+                UserAuth = DBUser.contains(Username);//.equals(Username);
             }
             if (UserAuth) {
                 authenticatorFlag = LOGIN_WRONGPASSWORD;
 
-                if (DBPass.contains(Password)) {
+                if (DBPass.contains(Password))//&& authenticatorFlag!=LOGIN_UNKNOWNUSERNAME)
+                {
 
                     authenticatorFlag = LOGIN_SUCCESS;
 
@@ -116,7 +118,7 @@ public class AuthenticateLogin extends HttpServlet {
 
             Connection con2 = DriverManager.getConnection(dbUrl, "root", "");
             Statement stmt2 = con2.createStatement();
-            adminSelectQuery = "select UserId from Administrator_List";
+            adminSelectQuery = "select UserId from Administrator_List";// where UserId="+DBUserId;
             ResultSet rs1 = stmt2.executeQuery(adminSelectQuery);
             int userID = 0;
 
@@ -140,25 +142,27 @@ public class AuthenticateLogin extends HttpServlet {
                 newUserSession.setAttribute("Username", Username);
                 newUserSession.setAttribute("UserId", DBUserId);
                 if (userTypeFlag == ADMIN_USER) {
-                    newUserSession.setAttribute("privilege", "adminUser");
+                    newUserSession.setAttribute("Privilage", "adminUser");
                 } else if (userTypeFlag == NORMAL_USER) {
-                    newUserSession.setAttribute("privilege", "normalUser");
+                    newUserSession.setAttribute("Privilage", "normalUser");
                 }
                 response.sendRedirect("home.jsp");
             } else if (authenticatorFlag == LOGIN_WRONGPASSWORD) {
-                out.println("Wrong password entered. Please try again<br>");
+                out.println("Please check the password you have entered and try again...<br>");//entered password: "+Password+"<br>DB password: "+DBPass);
                 out.println("<br><a href=\"index.html\">Click here to try again</a>");
             } else if (authenticatorFlag == LOGIN_UNKNOWNUSERNAME) {
-                out.println("The Username you have entered"
+                out.println("The username you have entered"
                         //+ " "+Username+" >> "+DBUser+" >> "+UserAuth
                         + " does not exist in our database...");
 
-                out.println("<br><a href=\"index.html\">Click to try again</a> ... OR ... "
-                        + "<a href=\"register.jsp\">Click to register</a>");
+                out.println("<br><a href=\"index.html\">Click here to try again</a> ... OR ... "
+                        + "<a href=\"register.jsp\">Click here to register</a>");
             }
 
         } catch (Exception e) {
-            out.println("<br><br><br>Sorry, we encountered trouble logging in <br><br>");
+            out.println("<br><br><br>It seems we have some error in our login mechanism...<br>Don't worry, we'll get"
+                    + "it fixed up pretty soon..."
+                    + "<br><br>Here's a bit of technical stuff for debugging : <br><br>");
             e.printStackTrace(out);
         } finally {
             out.close();
@@ -203,5 +207,5 @@ public class AuthenticateLogin extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }
+    }// </editor-fold>
 }

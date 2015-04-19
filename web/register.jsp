@@ -1,47 +1,37 @@
 <%-- 
     Document   : register
-    Created on : 17-Apr-2015, 10:22:30 PM
+    Created on : 18-Apr-2015, 8:14:48 PM
     Author     : C0648301
 --%>
 
-
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-        <title>New User Registration</title>
-        <script type="text/javascript"
-                src="scripts/userRegistrationValidation.js">
-        </script>
-        <script type="text/javascript">
-
-        </script>
+        <title>New Registration- MGIT</title>
         <style>
             #login-box {
-                width:333px;
-                height: 552px;
+                width:800px;
+                height: 352px;
                 padding: 58px 76px 0 76px;
                 color: #ebebeb;
-                font: 12px Arial, Helvetica, sans-serif;
+                font: 12px;
+
 
             }
-
-            #login-box img {
-                border:none;
-            }
-
             #login-box h2 {
                 padding:0;
                 margin:0;
-                color: #ebebeb;
-                font: bold 44px "Calibri", Arial;
+                color: black;
+
             }
 
 
             #login-box-name {
                 float: left;
                 display:inline;
-                width:80px;
+                width: 60px;
                 text-align: left;
                 padding: 14px 10px 0 0;
                 margin:0 0 7px 0;
@@ -59,9 +49,9 @@
             .form-login  {
                 width: 205px;
                 padding: 10px 4px 6px 3px;
-                border: 1px solid #0d2c52;
+                background-color:#8A601E;
                 font-size: 16px;
-                color: #000000;
+                color: black;
             }
 
 
@@ -77,23 +67,26 @@
             }
 
             #register-box {
-                width:833px;
-                height: 652px;
+                width:733px;
+                height: 550px;
                 padding: 0px 186px 20px 106px;
-                color: black;
+                color: #ebebeb;
                 font: 12px Arial, Helvetica, sans-serif;
+                background: url(images/4.png) no-repeat left top;
             }
         </style>
+        <script type="text/javascript" src="scripts/userRegistrationValidation.js"></script>
+        <script type="text/javascript"></script>
     </head>
 
     <body> 
-        <div style="padding: 10px 0 0 100px;">
+        <div style="padding: 100px 0 0 100px;">
             <form name="registerForm" id="registerForm" method="post" action="RegisterNewUser">
                 <table width="100%" id="register-box">
                     <tbody>
                         <tr>
                             <td><span style="font-family: arial,verdana; font-size: 10pt;">
-                                    <h2>Register to continue</h2>
+                                    <h2>Registration Form</h2>
 
 
                                     <div>
@@ -101,35 +94,35 @@
                                         <table cellspacing="1" cellpadding="3" border="0">
                                             <tbody>
                                                 <tr>
-                                                    <td id="login-box-name">NAME</td>
+                                                    <td id="login-box-name">Name:</td>
                                                     <td>
                                                         <input type="text" class="form-login" name="name" id="txtName" onChange="validateName()" />
                                                         <i id="nameError"></i>
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td id="login-box-name">AGE</td>
+                                                    <td id="login-box-name">Age:</td>
                                                     <td>
                                                         <input type="text" class="form-login" name="age" id="txtAge" onchange="validateAge()"  />
                                                         <i id="ageError"></i>
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td id="login-box-name">ADDRESS</td>
+                                                    <td id="login-box-name">Address:</td>
                                                     <td>
                                                         <input type="text" class="form-login" name="address" id="txtAddress" onchange="validateAddress()"  />
                                                         <i id="addressError"></i>
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td id="login-box-name">MOBILE NO</td>
+                                                    <td id="login-box-name">Mobile Number:</td>
                                                     <td>
                                                         <input type="text" class="form-login" name="phoneno" id="txtPhone" onchange="validatePhone()"  />
                                                         <i id="phoneError"></i>
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td id="login-box-name" >EMAIL-ID</td>
+                                                    <td id="login-box-name" >Email:</td>
                                                     <td>
                                                         <input type="text" class="form-login" name="email" id="txtEmail" onchange="validateEmail()"  />
                                                         <i id="emailError"></i>
@@ -137,21 +130,21 @@
                                                 </tr>
 
                                                 <tr>
-                                                    <td id="login-box-name"> USERNAME</td>
+                                                    <td id="login-box-name"> Username:</td>
                                                     <td>
                                                         <input type="text" class="form-login" name="username" id="txtUsername" onchange="check(this.value)" />
                                                         <i id="usernameError"></i>
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td id="login-box-name">PASSWORD</td>
+                                                    <td id="login-box-name">Password:</td>
                                                     <td>
                                                         <input type="password" class="form-login" id="txtPassword" name="password" />
                                                         <i id="passwordError"></i>
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td id="login-box-name">CONFIRM PASSWORD</td>
+                                                    <td id="login-box-name">Confirm Password:</td>
                                                     <td>
                                                         <input type="password" class="form-login" name="password2" id="txtConfirmPassword" onchange="validatePassword()" />
                                                         <i id="confirmpasswordError"></i>
